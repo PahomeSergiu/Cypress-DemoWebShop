@@ -10,7 +10,7 @@ class LoginPage {
     }
 
     insertPassword(){
-        return cy.get(loginLocators.passwordField).should('exist').type('1234567890',{log:false});
+        return cy.get(loginLocators.passwordField).should('exist').type('123456789000',{log:false});
     }
 
     checkRememberMeBox(){
