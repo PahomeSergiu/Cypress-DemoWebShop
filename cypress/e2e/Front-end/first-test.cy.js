@@ -1,3 +1,5 @@
+const { addProductToWishlistPage } = require("../../support/pages/AddProductToWishlist/addProductToWishlistPage.cy");
+const { addReviewToProductPage } = require("../../support/pages/AddReviewToProduct/addReviewToProductPage.cy");
 const { apparelAndShoesPage } = require("../../support/pages/Apparel&Shoes/apparel&shoesPage.cy");
 const { contactUsPage } = require("../../support/pages/ContactUsPage/contactUsPage.cy");
 const { loginPage } = require("../../support/pages/Login/loginPage.cy");
@@ -108,7 +110,7 @@ describe('Account login', () => {
         searchProductByTagPage.verifySmartphonePageAwesomeTag();   
     })
 
-    it.only('Positive case for ordering a product', () => {
+    it('Positive case for ordering a product', () => {
         loginPage.clickLoginHomepage();
         loginPage.insertEmail();
         loginPage.insertPassword();
@@ -136,6 +138,41 @@ describe('Account login', () => {
         orderProductFlowPage.verifyOrderNumberText();
         orderProductFlowPage.clickOrderSuccessPageContinueButton()
         loginPage.assertLoginProcess();
+    })
+
+    it.only('Add product to Wishlist', () => {
+        addProductToWishlistPage.clickJewelryHomepage();
+        addProductToWishlistPage.verifyJewelryPageTitle();
+        addProductToWishlistPage.clickBlackAndWhiteDiamondHeartItem();
+        addProductToWishlistPage.clickAddToWishlistButton();
+        addProductToWishlistPage.clickWishlistHeaderLink();
+        addProductToWishlistPage.verifyWishlistProductName();
+        addProductToWishlistPage.verifyWishlistProductPrice();
+        addProductToWishlistPage.verifyWishlistProductQuantity();
+        addProductToWishlistPage.clickRemoveCheckbox();
+        addProductToWishlistPage.clickUpdateWishlistButton();
+        addProductToWishlistPage.verifyWishlistEmptyText();  
+    })
+
+    it('Add review to a product', () => {
+        loginPage.clickLoginHomepage();
+        loginPage.insertEmail();
+        loginPage.insertPassword();
+        loginPage.checkRememberMeBox();
+        loginPage.clickLoginButton();
+        loginPage.assertLoginProcess();
+        recentlyViewedProductsPage.clickBooksHomepage();
+        recentlyViewedProductsPage.verifyBooksPageTitle();
+        addReviewToProductPage.clickFictionExBook();
+        addReviewToProductPage.verifyFictionExBookProductTitle();
+        addReviewToProductPage.clickAddYourReviewLink();
+        addReviewToProductPage.verifyReviewPageTitle();
+        addReviewToProductPage.insertReviewTitle();
+        addReviewToProductPage.insertReviewText();
+        addReviewToProductPage.selectRatingFourRadioButton();
+        addReviewToProductPage.clickSubmitReviewButton();
+        addReviewToProductPage.verifySubmittedReviewConfirmationMessage()
+        addReviewToProductPage.verifySubmittedReviewTitle()
     })
 
 })
