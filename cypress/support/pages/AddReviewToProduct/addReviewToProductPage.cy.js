@@ -17,9 +17,20 @@ class AddReviewToProductPage {
         return cy.get(addReviewToProductLocators.submitReviewPageTitle).contains('Write your own review');
     }
 
-    insertReviewTitle(){
-        return cy.get(addReviewToProductLocators.addReviewTitle).type('Prea jmekera cartea smr frate');
+    generateRandomTitle() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomTitle = '';
+        for (let i = 0; i < 10; i++) {
+            randomTitle += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return randomTitle;
     }
+
+    insertReviewTitleRandom() {
+        this.randomTitle = this.generateRandomTitle();
+        return cy.get(addReviewToProductLocators.addReviewTitle).type(this.randomTitle);
+    }
+    
 
     insertReviewText(){
         return cy.get(addReviewToProductLocators.addReviewText).type('am citit din ea la greu');
@@ -37,8 +48,12 @@ class AddReviewToProductPage {
         return cy.get(addReviewToProductLocators.submittedReviewConfirmationMessage).contains('Product review is successfully added.');
     }
 
-    verifySubmittedReviewTitle(){
-        return cy.get(addReviewToProductLocators.submittedReviewTitle).contains('Prea jmekera cartea smr frate');
+    // verifySubmittedReviewTitle(){
+    //     return cy.get(addReviewToProductLocators.submittedReviewTitle).contains('Prea jmekera cartea smr frate');
+    // }
+
+    verifySubmittedReviewTitle() {
+        return cy.get(addReviewToProductLocators.submittedReviewTitle).contains(this.randomTitle)
     }
 }
 

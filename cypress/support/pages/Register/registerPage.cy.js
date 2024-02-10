@@ -17,8 +17,16 @@ class RegisterPage {
         return cy.get(registerLocators.lastNameInput).type('Boss');
     }
 
-    insertEmail(){
-        return cy.get(registerLocators.emailInput).type('mihaitapatronasulu@yahoo.com');
+    // Metoda pentru a genera o adresă de email aleatorie
+    generateRandomEmail() {
+        const emailPrefix = Math.random().toString(36).substring(2, 10);
+        return `${emailPrefix}@example.com`;
+    }
+
+    // Metoda pentru a insera o adresă de email aleatorie și a o stoca în this.randomEmail
+    insertEmailRandom() {
+        this.randomEmail = this.generateRandomEmail(); // Salvează adresa de email generată în this.randomEmail
+        return cy.get(registerLocators.emailInput).type(this.randomEmail);
     }
 
 
@@ -44,7 +52,7 @@ class RegisterPage {
 
     assertRegisterProcess(){
         cy.url().should('contain','https://demowebshop.tricentis.com/');
-        cy.get(registerLocators.registerEmailConfirmation).contains('mihaitapatronasulu@yahoo.com');
+        cy.get(registerLocators.registerEmailConfirmation).contains(this.randomEmail); // Folosește this.randomEmail în contains()
         cy.get(registerLocators.registerlogoutHomepageButton).should('exist').and('be.visible').contains('Log out');
         cy.get(registerLocators.loginHomepageButton).should('not.exist');
     }

@@ -10,9 +10,10 @@ const { searchProductByTagPage } = require("../../support/pages/SearchByTag/sear
 const { sitemapSearchPage } = require("../../support/pages/Sitemap Search/sitemapSearchPage.cy");
 const { myAccountPage } = require("../../support/pages/myAccount/myAccountPage.cy");
 
-describe('Account login', () => {
+describe('Demo Webshop Test Flows', () => {
     beforeEach(() =>{
         cy.visit('/');
+        cy.viewport(1920, 1080)
     })
     it('Positive case for login', () => {
         loginPage.clickLoginHomepage();
@@ -28,7 +29,7 @@ describe('Account login', () => {
         registerPage.selectMaleGender();
         registerPage.insertFirstName();
         registerPage.insertLastName();
-        registerPage.insertEmail();
+        registerPage.insertEmailRandom();
         registerPage.insertPassword();
         registerPage.insertConfirmationPassword();
         registerPage.clickRegister();
@@ -37,21 +38,6 @@ describe('Account login', () => {
         registerPage.assertRegisterProcess();
     })
 
-    it('Positive case for changing password', () => {
-        loginPage.clickLoginHomepage();
-        loginPage.insertEmail();
-        loginPage.insertPassword();
-        loginPage.checkRememberMeBox();
-        loginPage.clickLoginButton();
-        loginPage.assertLoginProcess();
-        myAccountPage.clickAccountButtonHomepage();
-        myAccountPage.clickChangePassword();
-        myAccountPage.insertOldPassword();
-        myAccountPage.insertNewPassword();
-        myAccountPage.insertConfirmationPassword();
-        myAccountPage.clickChangePasswordButton();
-        myAccountPage.verifyPasswordChangeConfirmation();
-    })
 
     it('Submit Contact Us form', () => {
         contactUsPage.clickContactUsHomepage();
@@ -140,7 +126,7 @@ describe('Account login', () => {
         loginPage.assertLoginProcess();
     })
 
-    it.only('Add product to Wishlist', () => {
+    it('Add product to Wishlist', () => {
         addProductToWishlistPage.clickJewelryHomepage();
         addProductToWishlistPage.verifyJewelryPageTitle();
         addProductToWishlistPage.clickBlackAndWhiteDiamondHeartItem();
@@ -167,12 +153,28 @@ describe('Account login', () => {
         addReviewToProductPage.verifyFictionExBookProductTitle();
         addReviewToProductPage.clickAddYourReviewLink();
         addReviewToProductPage.verifyReviewPageTitle();
-        addReviewToProductPage.insertReviewTitle();
+        addReviewToProductPage.insertReviewTitleRandom();
         addReviewToProductPage.insertReviewText();
         addReviewToProductPage.selectRatingFourRadioButton();
         addReviewToProductPage.clickSubmitReviewButton();
         addReviewToProductPage.verifySubmittedReviewConfirmationMessage()
         addReviewToProductPage.verifySubmittedReviewTitle()
+    })
+
+    it('Positive case for changing password', () => {
+        myAccountPage.clickLoginHomepage();
+        myAccountPage.insertEmail();
+        myAccountPage.insertPassword();
+        myAccountPage.checkRememberMeBox();
+        myAccountPage.clickLoginButton();
+        myAccountPage.assertLoginProcess();
+        myAccountPage.clickAccountButtonHomepage();
+        myAccountPage.clickChangePassword();
+        myAccountPage.insertOldPassword();
+        myAccountPage.insertNewPassword();
+        myAccountPage.insertConfirmationPassword();
+        myAccountPage.clickChangePasswordButton();
+        myAccountPage.verifyPasswordChangeConfirmation();
     })
 
 })

@@ -1,4 +1,8 @@
 class MyAccountLocators {
+    
+    
+    
+    
     loggedEmailConfirmation = '[class="header-links"] [class="account"]';
     logoutHomepageButton = '[class="header-links"] [class="ico-logout"]';
 
