@@ -11,7 +11,7 @@ class MyAccountPage {
     }
 
     insertPassword(){
-        return cy.get(loginLocators.passwordField).should('exist').type('0987654321',{log:false});
+        return cy.get(loginLocators.passwordField).should('exist').type('987654321',{log:false});
     }
 
     checkRememberMeBox(){
@@ -38,15 +38,15 @@ class MyAccountPage {
     }
 
     insertOldPassword(){
-        return cy.get(myAccountLocators.oldPasswordInput).type('0987654321')
+        return cy.get(myAccountLocators.oldPasswordInput).type('987654321')
     }
 
     insertNewPassword(){
-        return cy.get(myAccountLocators.newPasswordInput).type('987654321')
+        return cy.get(myAccountLocators.newPasswordInput).type('0987654321')
     }
 
     insertConfirmationPassword(){
-        return cy.get(myAccountLocators.confirmPasswordInput).type('987654321')
+        return cy.get(myAccountLocators.confirmPasswordInput).type('0987654321')
     }
 
     clickChangePasswordButton(){
