@@ -3,6 +3,7 @@ const { addReviewToProductPage } = require("../../support/pages/AddReviewToProdu
 const { apparelAndShoesPage } = require("../../support/pages/Apparel&Shoes/apparel&shoesPage.cy");
 const { contactUsPage } = require("../../support/pages/ContactUsPage/contactUsPage.cy");
 const { loginPage } = require("../../support/pages/Login/loginPage.cy");
+const { orderCheapCustomPCPage } = require("../../support/pages/OrderCheapCustomizedPC/orderCheapCustomPCPage.cy");
 const { orderProductFlowPage } = require("../../support/pages/OrderProductFlow/orderProductFlowPage.cy");
 const { recentlyViewedProductsPage } = require("../../support/pages/Recently Viewed Products/recentlyViewedProductsPage.cy");
 const { registerPage } = require("../../support/pages/Register/registerPage.cy");
@@ -13,7 +14,7 @@ const { myAccountPage } = require("../../support/pages/myAccount/myAccountPage.c
 describe('Demo Webshop Test Flows', () => {
     beforeEach(() =>{
         cy.visit('/');
-        cy.viewport(1920, 1080)
+        // cy.viewport(1920, 1080)
     })
     it('Positive case for login', () => {
         loginPage.clickLoginHomepage();
@@ -175,6 +176,38 @@ describe('Demo Webshop Test Flows', () => {
         myAccountPage.insertConfirmationPassword();
         myAccountPage.clickChangePasswordButton();
         myAccountPage.verifyPasswordChangeConfirmation();
+    })
+
+    it.only('Add cheap computer to shopping cart', () => {
+        orderCheapCustomPCPage.clickComputers();
+        orderCheapCustomPCPage.verifyComputersPageTitle();
+        orderCheapCustomPCPage.selectDesktops();
+        orderCheapCustomPCPage.selectCheapComputer();
+        orderCheapCustomPCPage.verifyCheapComputersPageTitle();
+        orderCheapCustomPCPage.checkCheapComputerInitialPrice();
+        orderCheapCustomPCPage.selectFastProcessor();
+        orderCheapCustomPCPage.selectMaxRam();
+        orderCheapCustomPCPage.selectMaxHdd();
+        orderCheapCustomPCPage.selectImageViewer();
+        orderCheapCustomPCPage.selectOtherOfficeSuite();
+        orderCheapCustomPCPage.checkCheapComputerInitialQuantity();
+        orderCheapCustomPCPage.clickAddToCart();
+        orderCheapCustomPCPage.verifyItemAddedSuccessMessage();
+        orderCheapCustomPCPage.clickShoppingCart();
+        orderCheapCustomPCPage.verifyShoppingCartItemName();
+        orderCheapCustomPCPage.verifyItemCustomizedAttributeProcessor();
+        orderCheapCustomPCPage.verifyItemCustomizedAttributeRam();
+        orderCheapCustomPCPage.verifyItemCustomizedAttributeHdd();
+        orderCheapCustomPCPage.verifyItemCustomizedAttributeImage();
+        orderCheapCustomPCPage.verifyItemCustomizedAttributeSuite();
+        orderCheapCustomPCPage.checkShoppingCartQuantity();
+        orderCheapCustomPCPage.verifyShoppingCartInitialSubtotal();
+        orderCheapCustomPCPage.changeShoppingCartQuantity();
+        orderCheapCustomPCPage.clickUpdateShoppingCartQuantity();
+        orderCheapCustomPCPage.verifyShoppingCartSubtotalAfterUpdate();
+        orderCheapCustomPCPage.clickRemoveItem();
+        orderCheapCustomPCPage.clickUpdateShoppingCartQuantity();
+        orderCheapCustomPCPage.verifyEmptyShoppingCartAfterUpdate();
     })
 
 })
