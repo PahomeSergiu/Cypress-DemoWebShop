@@ -1,4 +1,5 @@
 const { addProductToWishlistPage } = require("../../support/pages/AddProductToWishlist/addProductToWishlistPage.cy");
+const { addProductsToCompareListPage } = require("../../support/pages/AddProductsToCompareList/addProductsToCompareListPage.cy");
 const { addReviewToProductPage } = require("../../support/pages/AddReviewToProduct/addReviewToProductPage.cy");
 const { apparelAndShoesPage } = require("../../support/pages/Apparel&Shoes/apparel&shoesPage.cy");
 const { contactUsPage } = require("../../support/pages/ContactUsPage/contactUsPage.cy");
@@ -178,7 +179,7 @@ describe('Demo Webshop Test Flows', () => {
         myAccountPage.verifyPasswordChangeConfirmation();
     })
 
-    it.only('Add cheap computer to shopping cart', () => {
+    it('Add cheap computer to shopping cart', () => {
         orderCheapCustomPCPage.clickComputers();
         orderCheapCustomPCPage.verifyComputersPageTitle();
         orderCheapCustomPCPage.selectDesktops();
@@ -210,4 +211,20 @@ describe('Demo Webshop Test Flows', () => {
         orderCheapCustomPCPage.verifyEmptyShoppingCartAfterUpdate();
     })
 
+    it.only('Add products to compare list', () => { 
+        addProductsToCompareListPage.selectCellphonesHomepage(); 
+        addProductsToCompareListPage.clickSmartphone(); 
+        addProductsToCompareListPage.addItemToCompareProducts(); 
+        addProductsToCompareListPage.verifyCompareProductsPageTitle(); 
+        addProductsToCompareListPage.verifySmartphoneCompareProductsList(); 
+        addProductsToCompareListPage.selectCellphonesHomepage();
+        addProductsToCompareListPage.clickUsedPhone();
+        addProductsToCompareListPage.addItemToCompareProducts();
+        addProductsToCompareListPage.verifyUsedphoneCompareProductsList(); 
+        addProductsToCompareListPage.clickFirstRemoveButton(); 
+        addProductsToCompareListPage.verifyRemovedUsedPhoneCompareProductsList(); 
+        addProductsToCompareListPage.clickRemoveButtonSecond(); 
+        addProductsToCompareListPage.verifyRemovedSmartphoneCompareProductsList(); 
+        addProductsToCompareListPage.verifyCompareProductsEmptyMessage(); 
+    })
 })
